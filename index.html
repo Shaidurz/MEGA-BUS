@@ -145,7 +145,6 @@
 
             const grandTotal = totalPrice + tax;
             document.getElementById('grand-total').innerText = '$' + grandTotal;
-            return grandTotal;
         }
 
         function getInputValue(ticket) {
@@ -153,7 +152,7 @@
             const ticketClassCount = parseInt(ticketInput.value);
             return ticketClassCount;
         }
-        document.getElementById("ticket-book").addEventListener("click", function (calculateTotal) {
+        document.getElementById("ticket-book").addEventListener("click", function () {
             alert("Welcome !! Please confirm payment to book your ticket.")
         });
 
