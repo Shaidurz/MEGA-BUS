@@ -122,3 +122,8 @@ nav ul li a:hover, a.active{
     display: flex;
     justify-content: space-between;
 }
+.btn-border{
+    border: none;
+    background-color: white;
+    color:  #52AF3A;
+}

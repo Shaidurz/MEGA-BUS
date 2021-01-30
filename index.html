@@ -69,8 +69,8 @@
                         <input id="inputFirstClass" class="inp-style inp-width" type="text" name="" value="0">
                     </div>
                     <div class="plus-minus-btn">
-                        <button onclick="handleTicketChange('inputFirst', true)"><i class="fas fa-plus"></i></button>
-                        <button onclick="handleTicketChange('inputFirst', false)" ><i class="fas fa-minus"></i></button>
+                        <button class="btn-border" onclick="handleTicketChange('inputFirst', true)"><i class="fas fa-plus"></i></button>
+                        <button class="btn-border" onclick="handleTicketChange('inputFirst', false)"><i class="fas fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="input-group f-class">
@@ -79,8 +79,9 @@
                         <input id="inputEconomyClass" class="inp-style inp-width" type="number" name="" value="0">
                     </div>
                     <div class="plus-minus-btn">
-                        <button onclick="handleTicketChange('inputEconomy', true)"><i class="fas fa-plus"></i></button>
-                        <button onclick="handleTicketChange('inputEconomy', false)"><i class="fas fa-minus"></i></button>
+                        <button class="btn-border" onclick="handleTicketChange('inputEconomy', true)"><i class="fas fa-plus"></i></button>
+                        <button class="btn-border" onclick="handleTicketChange('inputEconomy', false)"><i
+                                class="fas fa-minus "></i></button>
                     </div>
                 </div>
 
@@ -91,7 +92,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p id="total-price">$000</p>
                     </div>
                 </div>
 
@@ -100,7 +101,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p id="tax-amount">$00</p>
                     </div>
                 </div>
                 <hr>
@@ -109,18 +110,18 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p id="grand-total">$000</p>
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="ticket-book" class="btn-style">Book Now</button>
         </div>
     </main>
 
     <script>
-         function handleTicketChange(ticket, isIncrease) {
+        function handleTicketChange(ticket, isIncrease) {
             const inputTicketClass = document.getElementById(ticket + "Class");
-            const ticketClassCount = parseInt(inputTicketClass.value);
+            const ticketClassCount = getInputValue(ticket);
             let ticketClassNewCount = ticketClassCount;
             if (isIncrease == true) {
                 ticketClassNewCount = ticketClassCount + 1;
@@ -129,61 +130,32 @@
                 ticketClassNewCount = ticketClassCount - 1;
             }
             inputTicketClass.value = ticketClassNewCount;
-            // const economyClassTotal = economyClassNewCount * 100;
-            // document.getElementById("economyClass-total").innerText = economyClassTotal;
+            calculateTotal();
         }
-        
 
-        function calculateTotal (){
-            
+        function calculateTotal() {
+            const firstClassCount = getInputValue('inputFirst');
+            const economyClassCount = getInputValue('inputEconomy');
+
+            const totalPrice = firstClassCount * 150 + economyClassCount * 100;
+            document.getElementById('total-price').innerText = '$' + totalPrice;
+
+            const tax = Math.round(totalPrice * .10);
+            document.getElementById('tax-amount').innerText = '$' + tax;
+
+            const grandTotal = totalPrice + tax;
+            document.getElementById('grand-total').innerText = '$' + grandTotal;
+            return grandTotal;
         }
-        // function handleTicketChange(isIncrease) {
-        //     const inputFirstClass = document.getElementById("inputFirstClass");
-        //     const firstClassCount = parseInt(inputFirstClass.value);
-        //     let firstClassNewCount = firstClassCount;
-        //     if (isIncrease == true) {
-        //         firstClassNewCount = firstClassCount + 1;
-        //     }
-        //     if (isIncrease == false && firstClassCount > 0) {
-        //         firstClassNewCount = firstClassCount - 1;
-        //     }
-        //     inputFirstClass.value = firstClassNewCount;
-        //     const firstClassTotal = firstClassNewCount * 150;
-        //     document.getElementById("firstClass-total").innerText = firstClassTotal;
-        // }
 
-
-        // function handleTicketChanges(isIncrease) {
-        //     const inputEconomyClass = document.getElementById("inputEconomyClass");
-        //     const economyClassCount = parseInt(inputEconomyClass.value);
-        //     let economyClassNewCount = economyClassCount;
-        //     if (isIncrease == true) {
-        //         economyClassNewCount = economyClassCount + 1;
-        //     }
-        //     if (isIncrease == false && economyClassCount > 0) {
-        //         economyClassNewCount = economyClassCount - 1;
-        //     }
-        //     inputEconomyClass.value = economyClassNewCount;
-        //     const economyClassTotal = economyClassNewCount * 100;
-        //     document.getElementById("economyClass-total").innerText = economyClassTotal;
-        // }
-
-        // document.getElementById("increaseEconomyClass").addEventListener("click", function () {
-        //     const inputEconomyClass = document.getElementById("inputEconomyClass");
-        //     const economyClassCount = parseInt(inputEconomyClass.value);
-        //     const economyClassNewCount = economyClassCount + 1;
-        //     inputEconomyClass.value = economyClassNewCount;
-        //     const economyClassTotal = economyClassNewCount * 150;
-        //     document.getElementById("economyClass-total").innerText = economyClassTotal;
-        // })
-        // document.getElementById("reduceEconomyClass").addEventListener("click", function () {
-        //     const inputEconomyClass = document.getElementById("inputEconomyClass");
-        //     const economyClassCount = parseInt(inputEconomyClass.value);
-        //     const economyClassNewCount = economyClassCount - 1;
-        //     inputEconomyClass.value = economyClassNewCount;
-        //     const economyClassTotal = economyClassNewCount * 150;
-        //     document.getElementById("economyClass-total").innerText = economyClassTotal;
-        // })
+        function getInputValue(ticket) {
+            const ticketInput = document.getElementById(ticket + "Class");
+            const ticketClassCount = parseInt(ticketInput.value);
+            return ticketClassCount;
+        }
+        document.getElementById("ticket-book").addEventListener("click", function (calculateTotal) {
+            alert("Welcome !! Please confirm payment to book your ticket.")
+        });
 
     </script>
     <!--Thank You-->
