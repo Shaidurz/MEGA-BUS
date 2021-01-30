@@ -69,8 +69,8 @@
                         <input id="inputFirstClass" class="inp-style inp-width" type="text" name="" value="0">
                     </div>
                     <div class="plus-minus-btn">
-                        <button onclick="handleTicketChange(true)"><i class="fas fa-plus"></i></button>
-                        <button onclick="handleTicketChange(false)" ><i class="fas fa-minus"></i></button>
+                        <button onclick="handleTicketChange('inputFirst', true)"><i class="fas fa-plus"></i></button>
+                        <button onclick="handleTicketChange('inputFirst', false)" ><i class="fas fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="input-group f-class">
@@ -79,8 +79,8 @@
                         <input id="inputEconomyClass" class="inp-style inp-width" type="number" name="" value="0">
                     </div>
                     <div class="plus-minus-btn">
-                        <button onclick="handleTicketChanges(true)"><i class="fas fa-plus"></i></button>
-                        <button onclick="handleTicketChanges(false)"><i class="fas fa-minus"></i></button>
+                        <button onclick="handleTicketChange('inputEconomy', true)"><i class="fas fa-plus"></i></button>
+                        <button onclick="handleTicketChange('inputEconomy', false)"><i class="fas fa-minus"></i></button>
                     </div>
                 </div>
 
@@ -118,38 +118,55 @@
     </main>
 
     <script>
+         function handleTicketChange(ticket, isIncrease) {
+            const inputTicketClass = document.getElementById(ticket + "Class");
+            const ticketClassCount = parseInt(inputTicketClass.value);
+            let ticketClassNewCount = ticketClassCount;
+            if (isIncrease == true) {
+                ticketClassNewCount = ticketClassCount + 1;
+            }
+            if (isIncrease == false && ticketClassCount > 0) {
+                ticketClassNewCount = ticketClassCount - 1;
+            }
+            inputTicketClass.value = ticketClassNewCount;
+            // const economyClassTotal = economyClassNewCount * 100;
+            // document.getElementById("economyClass-total").innerText = economyClassTotal;
+        }
         
-        function handleTicketChange(isIncrease) {
-            const inputFirstClass = document.getElementById("inputFirstClass");
-            const firstClassCount = parseInt(inputFirstClass.value);
-            let firstClassNewCount = firstClassCount;
-            if (isIncrease == true) {
-                firstClassNewCount = firstClassCount + 1;
-            }
-            if (isIncrease == false && firstClassCount > 0) {
-                firstClassNewCount = firstClassCount - 1;
-            }
-            inputFirstClass.value = firstClassNewCount;
-            const firstClassTotal = firstClassNewCount * 150;
-            document.getElementById("firstClass-total").innerText = firstClassTotal;
-        }
 
-     
-
-        function handleTicketChanges(isIncrease) {
-            const inputEconomyClass = document.getElementById("inputEconomyClass");
-            const economyClassCount = parseInt(inputEconomyClass.value);
-            let economyClassNewCount = economyClassCount;
-            if (isIncrease == true) {
-                economyClassNewCount = economyClassCount + 1;
-            }
-            if (isIncrease == false && economyClassCount > 0) {
-                economyClassNewCount = economyClassCount - 1;
-            }
-            inputEconomyClass.value = economyClassNewCount;
-            const economyClassTotal = economyClassNewCount * 100;
-            document.getElementById("economyClass-total").innerText = economyClassTotal;
+        function calculateTotal (){
+            
         }
+        // function handleTicketChange(isIncrease) {
+        //     const inputFirstClass = document.getElementById("inputFirstClass");
+        //     const firstClassCount = parseInt(inputFirstClass.value);
+        //     let firstClassNewCount = firstClassCount;
+        //     if (isIncrease == true) {
+        //         firstClassNewCount = firstClassCount + 1;
+        //     }
+        //     if (isIncrease == false && firstClassCount > 0) {
+        //         firstClassNewCount = firstClassCount - 1;
+        //     }
+        //     inputFirstClass.value = firstClassNewCount;
+        //     const firstClassTotal = firstClassNewCount * 150;
+        //     document.getElementById("firstClass-total").innerText = firstClassTotal;
+        // }
+
+
+        // function handleTicketChanges(isIncrease) {
+        //     const inputEconomyClass = document.getElementById("inputEconomyClass");
+        //     const economyClassCount = parseInt(inputEconomyClass.value);
+        //     let economyClassNewCount = economyClassCount;
+        //     if (isIncrease == true) {
+        //         economyClassNewCount = economyClassCount + 1;
+        //     }
+        //     if (isIncrease == false && economyClassCount > 0) {
+        //         economyClassNewCount = economyClassCount - 1;
+        //     }
+        //     inputEconomyClass.value = economyClassNewCount;
+        //     const economyClassTotal = economyClassNewCount * 100;
+        //     document.getElementById("economyClass-total").innerText = economyClassTotal;
+        // }
 
         // document.getElementById("increaseEconomyClass").addEventListener("click", function () {
         //     const inputEconomyClass = document.getElementById("inputEconomyClass");
